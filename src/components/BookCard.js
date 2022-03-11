@@ -80,8 +80,6 @@ const BookCard = ({ image, author, title, bookmark, categoryId }) => {
   const { setSavedBook, deleteBook, savedBook } = useContext(BookContext);
   const [transparent, setTransparennt] = useState(false);
 
-  console.log(savedBook);
-
   return (
     <BookContainer>
       {bookmark ? (

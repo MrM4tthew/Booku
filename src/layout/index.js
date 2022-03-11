@@ -6,11 +6,15 @@ import Header from "./Header";
 const PageContainer = styled.div`
   min-height: 100vh;
 `;
+const HeaderBox = styled.div`
+  height: 60px;
+`;
 
 const Index = ({ children }) => {
   return (
     <>
       <Header />
+      <HeaderBox />
       <PageContainer>{children}</PageContainer>
       <Footer />
     </>

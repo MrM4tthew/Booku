@@ -4,10 +4,12 @@ import Link from "next/link";
 import { BookContext } from "../../context/BookContext";
 
 const HeaderContainer = styled.header`
+  position: fixed;
+  z-index: 80;
+  width: 100vw;
   display: flex;
   justify-content: center;
   background-color: #4661fa;
-  /* background-color: white; */
   height: 60px;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
 
@@ -27,7 +29,7 @@ const HeaderContainer = styled.header`
       display: flex;
       justify-content: space-between;
       align-items: center;
-      width: 300px;
+      width: 180px;
       list-style: none;
 
       .collection-menu {
@@ -35,8 +37,8 @@ const HeaderContainer = styled.header`
 
         .item-count {
           position: absolute;
-          right: 0;
-          top: 0;
+          right: -10px;
+          top: -6px;
           background-color: red;
           width: 20px;
           height: 20px;
@@ -65,11 +67,6 @@ const Header = () => {
           <li>
             <Link href="/">
               <a>Home</a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/">
-              <a>Categories</a>
             </Link>
           </li>
           <li className="collection-menu">

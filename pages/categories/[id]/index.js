@@ -1,14 +1,20 @@
 import styled from "@emotion/styled";
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { BookContext } from "../../../context/BookContext";
 import BookCard from "../../../src/components/BookCard";
 import SearchBar from "../../../src/components/SearchBar";
 import Layout from "../../../src/layout";
 import { data } from "../../../src/screensizes/data";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const BooksContainer = styled.div`
   display: flex;
   justify-content: center;
+
+  .set-width {
+    display: flex;
+    flex-direction: column;
+  }
 
   .books {
     display: grid;
@@ -40,13 +46,20 @@ const Index = ({ booksData, categoryId }) => {
     setSearch(result);
   };
 
-  console.log(categoryId);
   return (
     <Layout>
       <BooksContainer>
         <div className="set-width">
+          <span className="page-title">Books Collection</span>
           <SearchBar handleInputChange={handleInputChange} />
           <div className="books">
+            {/* <InfiniteScroll
+              dataLength={search.length}
+              next={getMorePosts}
+              hasMore={hasMore}
+              loader={<h4>Loading...</h4>}
+              endMessage={""}
+            > */}
             {search.map((data, index) => (
               <BookCard
                 key={index}
@@ -56,6 +69,7 @@ const Index = ({ booksData, categoryId }) => {
                 categoryId={categoryId}
               />
             ))}
+            {/* </InfiniteScroll> */}
           </div>
         </div>
       </BooksContainer>

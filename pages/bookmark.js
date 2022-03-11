@@ -4,6 +4,7 @@ import { BookContext } from "../context/BookContext";
 import BookCard from "../src/components/BookCard";
 import SearchBar from "../src/components/SearchBar";
 import Layout from "../src/layout";
+import { data } from "../src/screensizes/data";
 
 const BookmarkContainer = styled.div`
   display: flex;
@@ -19,11 +20,18 @@ const BookmarkContainer = styled.div`
     grid-template-columns: 1fr 1fr 1fr 1fr;
     column-gap: 15px;
     row-gap: 25px;
+
+    @media (max-width: ${data.almostTablet}) {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    @media (max-width: ${data.tablet}) {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 `;
 
 const bookmark = () => {
-  const { data } = useContext(BookContext);
+  const { data, searchInput } = useContext(BookContext);
   const [search, setSearch] = useState([]);
 
   useEffect(() => {
@@ -45,19 +53,28 @@ const bookmark = () => {
       <BookmarkContainer>
         <div className="set-width">
           <span className="page-title">My Collection</span>
-          <SearchBar handleInputChange={handleInputChange} />
-          <div className="books">
-            {search.map((value, index) => (
-              <BookCard
-                key={index}
-                image={value.image}
-                author={value.author}
-                title={value.title}
-                bookmark={true}
-                categoryId={value.categoryId}
-              />
-            ))}
-          </div>
+          <SearchBar
+            handleInputChange={handleInputChange}
+            status={data.length == 0 ? true : false}
+          />
+          {data.length == 0 ? (
+            <span>Your collection is empty</span>
+          ) : search.length == 0 ? (
+            <span>No item named "{searchInput}"</span>
+          ) : (
+            <div className="books">
+              {search.map((value, index) => (
+                <BookCard
+                  key={index}
+                  image={value.image}
+                  author={value.author}
+                  title={value.title}
+                  bookmark={true}
+                  categoryId={value.categoryId}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </BookmarkContainer>
     </Layout>

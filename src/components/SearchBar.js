@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
-import React from "react";
+import React, { useContext } from "react";
+import { BookContext } from "../../context/BookContext";
 
 const SearchContainer = styled.div`
   width: 100%;
@@ -19,15 +20,27 @@ const SearchContainer = styled.div`
     color: rgba(0, 0, 0, 0.5);
     opacity: 1;
   }
-  input::placeholder {
-    color: rgba(0, 0, 0, 0.3);
+
+  input:disabled,
+  input[disabled] {
+    opacity: 0.1;
+    transition: 100ms ease-in;
   }
 `;
 
-const SearchBar = ({ handleInputChange }) => {
+const SearchBar = ({ handleInputChange, status }) => {
+  const { setSearchInput } = useContext(BookContext);
   return (
     <SearchContainer>
-      <input type="text" placeholder="search..." onChange={handleInputChange} />
+      <input
+        type="text"
+        placeholder="search..."
+        onChange={(e) => {
+          handleInputChange(e);
+          setSearchInput(e.target.value);
+        }}
+        disabled={status}
+      />
     </SearchContainer>
   );
 };

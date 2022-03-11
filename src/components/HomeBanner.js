@@ -16,11 +16,14 @@ const HomeBannerContainer = styled.div`
   margin: 50px 0px;
 
   .leftSide {
-    width: auto;
+    min-width: 150px !important;
     height: 100%;
+    margin-right: 25px;
+    /* background-color: red; */
 
     img {
-      width: auto;
+      /* display: none; */
+      width: 100%;
       height: 100%;
       object-fit: contain;
     }
@@ -30,7 +33,7 @@ const HomeBannerContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 80%;
+    width: 100%;
     height: 100%;
   }
 `;
