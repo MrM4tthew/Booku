@@ -141,7 +141,7 @@ const Index = ({ bookName, booksData, id }) => {
             </div>
             <p className="description">{bookInfo.description}</p>
             <div className="book-sections">
-              <span className="title">What's inside?</span>
+              <span className="title">What&apos;s inside?</span>
               <div className="sections">
                 {bookInfo.sections.map((value, index) => (
                   <BookSection

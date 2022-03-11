@@ -30,7 +30,7 @@ const BookmarkContainer = styled.div`
   }
 `;
 
-const bookmark = () => {
+const Bookmark = () => {
   const { data, searchInput } = useContext(BookContext);
   const [search, setSearch] = useState([]);
 
@@ -60,7 +60,7 @@ const bookmark = () => {
           {data.length == 0 ? (
             <span>Your collection is empty</span>
           ) : search.length == 0 ? (
-            <span>No item named "{searchInput}"</span>
+            <span>No item named {searchInput}</span>
           ) : (
             <div className="books">
               {search.map((value, index) => (
@@ -69,7 +69,7 @@ const bookmark = () => {
                   image={value.image}
                   author={value.author}
                   title={value.title}
-                  bookmark={true}
+                  Bookmark={true}
                   categoryId={value.categoryId}
                 />
               ))}
@@ -81,4 +81,4 @@ const bookmark = () => {
   );
 };
 
-export default bookmark;
+export default Bookmark;
