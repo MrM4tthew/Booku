@@ -49,6 +49,7 @@ const BookContainer = styled.div`
 
         &.delete {
           background-color: red;
+          cursor: pointer;
         }
 
         &.view {

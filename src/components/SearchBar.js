@@ -6,7 +6,7 @@ const SearchContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  margin: 10px 0px 30px 0px;
+  margin: 10px 0px 20px 0px;
 
   input {
     width: 100%;

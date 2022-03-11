@@ -21,7 +21,7 @@ const Footer = () => {
   return (
     <FooterContainer>
       <div className="set-width">
-        <span className="text">This is footer</span>
+        <span className="text">@copyright 2022</span>
       </div>
     </FooterContainer>
   );

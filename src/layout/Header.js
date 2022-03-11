@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import styled from "@emotion/styled";
 import Link from "next/link";
 import { BookContext } from "../../context/BookContext";
+import { useRouter } from "next/router";
 
 const HeaderContainer = styled.header`
   position: fixed;
@@ -32,6 +33,16 @@ const HeaderContainer = styled.header`
       width: 180px;
       list-style: none;
 
+      a {
+        color: white;
+        opacity: 1;
+
+        &.active {
+          opacity: 0.7;
+          cursor: initial;
+        }
+      }
+
       .collection-menu {
         position: relative;
 
@@ -59,6 +70,8 @@ const HeaderContainer = styled.header`
 
 const Header = () => {
   const { data } = useContext(BookContext);
+  const router = useRouter();
+
   return (
     <HeaderContainer>
       <div className="set-width">
@@ -66,12 +79,14 @@ const Header = () => {
         <ul>
           <li>
             <Link href="/">
-              <a>Home</a>
+              <a className={router.pathname == "/" ? "active" : ""}>Home</a>
             </Link>
           </li>
           <li className="collection-menu">
             <Link href="/bookmark">
-              <a>My Collection</a>
+              <a className={router.pathname == "/bookmark" ? "active" : ""}>
+                My Collection
+              </a>
             </Link>
             {data.length != 0 ? (
               <div className="item-count">
