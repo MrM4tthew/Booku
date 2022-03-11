@@ -9,6 +9,11 @@ const BookmarkContainer = styled.div`
   display: flex;
   justify-content: center;
 
+  .set-width {
+    display: flex;
+    flex-direction: column;
+  }
+
   .books {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -31,30 +36,25 @@ const bookmark = () => {
     var result = data.filter(
       (x) =>
         x.title.toString().toLowerCase().includes(valueStr) ||
-        x.authors[0].toString().toLowerCase().includes(valueStr)
+        x.author[0].toString().toLowerCase().includes(valueStr)
     );
     setSearch(result);
   };
-
-  console.log(search);
   return (
     <Layout>
       <BookmarkContainer>
         <div className="set-width">
+          <span className="page-title">My Collection</span>
           <SearchBar handleInputChange={handleInputChange} />
-          {/* {search
-        ? search.map((data, index) => {
-            <div key={index}>{data.title}</div>;
-          })
-        : "there is no bookmark data"} */}
-
           <div className="books">
             {search.map((value, index) => (
               <BookCard
                 key={index}
                 image={value.image}
                 author={value.author}
+                title={value.title}
                 bookmark={true}
+                categoryId={value.categoryId}
               />
             ))}
           </div>

@@ -1,7 +1,9 @@
 import styled from "@emotion/styled";
-import React from "react";
+import React, { useContext } from "react";
 import Layout from "../../../../src/layout";
 import BookSection from "../../../../src/components/BookSection";
+import { data } from "../../../../src/screensizes/data";
+import { BookContext } from "../../../../context/BookContext";
 
 const BookDetailContainer = styled.div`
   display: flex;
@@ -11,9 +13,17 @@ const BookDetailContainer = styled.div`
   .set-width {
     display: flex;
 
+    @media (max-width: ${data.tablet}) {
+      flex-direction: column;
+      align-items: center;
+    }
+
     .left-side {
       width: 180px;
-      margin-right: 25px;
+      margin: 0px 25px 0px 0px;
+      @media (max-width: ${data.tablet}) {
+        margin: 0px 0px 25px 0px;
+      }
 
       img {
         width: 180px;
@@ -21,10 +31,40 @@ const BookDetailContainer = styled.div`
     }
 
     .right-side {
-      width: auto;
-      .title {
-        font-size: 30px;
-        font-weight: 600;
+      width: 100%;
+
+      .title-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .title {
+          font-size: 30px;
+          font-weight: 600;
+        }
+
+        button {
+          border: none;
+          font-size: 15px;
+          padding: 8px 15px;
+          border-radius: 7px;
+          background-color: #0378ff;
+          color: white;
+          cursor: pointer;
+          opacity: 1;
+          transition: opacity 100ms ease-in-out;
+          &:hover {
+            opacity: 0.9;
+          }
+        }
+
+        .message {
+          background-color: #02bd50;
+          padding: 10px;
+          font-size: 12px;
+          font-weight: 600;
+          color: white;
+          border-radius: 15px;
+        }
       }
 
       .authors {
@@ -44,6 +84,7 @@ const BookDetailContainer = styled.div`
         margin-top: 20px;
         display: flex;
         flex-direction: column;
+        width: 100%;
 
         .title {
           font-size: 19px;
@@ -55,8 +96,10 @@ const BookDetailContainer = styled.div`
   }
 `;
 
-const Index = ({ bookName, booksData }) => {
+const Index = ({ bookName, booksData, id }) => {
+  const { setSavedBook, saveBook, data } = useContext(BookContext);
   const bookInfo = booksData.filter((x) => x.title == bookName)[0];
+  const bookSaved = data.filter((x) => x.title == bookInfo.title);
 
   return (
     <Layout>
@@ -66,7 +109,26 @@ const Index = ({ bookName, booksData }) => {
             <img src={bookInfo.cover_url} alt="" />
           </div>
           <div className="right-side">
-            <span className="title">{bookInfo.title}</span>
+            <div className="title-container">
+              <span className="title">{bookInfo.title}</span>
+              {bookSaved.length == 0 ? (
+                <button
+                  onMouseOver={() =>
+                    setSavedBook({
+                      image: bookInfo.cover_url,
+                      title: bookInfo.title,
+                      author: bookInfo.authors,
+                      categoryId: id,
+                    })
+                  }
+                  onClick={() => saveBook()}
+                >
+                  Save
+                </button>
+              ) : (
+                <span className="message">Book is Saved</span>
+              )}
+            </div>
             <div className="authors">
               by&nbsp;
               {bookInfo.authors.length == 1

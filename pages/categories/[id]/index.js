@@ -4,6 +4,7 @@ import { BookContext } from "../../../context/BookContext";
 import BookCard from "../../../src/components/BookCard";
 import SearchBar from "../../../src/components/SearchBar";
 import Layout from "../../../src/layout";
+import { data } from "../../../src/screensizes/data";
 
 const BooksContainer = styled.div`
   display: flex;
@@ -14,6 +15,13 @@ const BooksContainer = styled.div`
     grid-template-columns: 1fr 1fr 1fr 1fr;
     column-gap: 15px;
     row-gap: 25px;
+
+    @media (max-width: ${data.almostTablet}) {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    @media (max-width: ${data.tablet}) {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 `;
 

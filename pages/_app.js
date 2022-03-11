@@ -24,6 +24,12 @@ const GlobalCSS = css`
   p {
     margin: 0;
   }
+
+  .page-title {
+    font-size: 35px;
+    font-weight: 600;
+    margin-top: 30px;
+  }
 `;
 
 function MyApp({ Component, pageProps }) {

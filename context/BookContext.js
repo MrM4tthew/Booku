@@ -21,6 +21,13 @@ export const BookProvider = (props) => {
 
   const saveBook = () => {
     setData([...data, savedBook]);
+    setSavedBook({});
+  };
+
+  const deleteBook = () => {
+    const updateList = data.filter((x) => x.title != savedBook.title);
+    setData(updateList);
+    setSavedBook({});
   };
 
   return (
@@ -29,6 +36,7 @@ export const BookProvider = (props) => {
         data,
         setSavedBook,
         saveBook,
+        deleteBook,
         savedBook,
       }}
     >

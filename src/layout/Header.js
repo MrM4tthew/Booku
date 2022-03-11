@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "@emotion/styled";
 import Link from "next/link";
+import { BookContext } from "../../context/BookContext";
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -28,11 +29,34 @@ const HeaderContainer = styled.header`
       align-items: center;
       width: 300px;
       list-style: none;
+
+      .collection-menu {
+        position: relative;
+
+        .item-count {
+          position: absolute;
+          right: 0;
+          top: 0;
+          background-color: red;
+          width: 20px;
+          height: 20px;
+          border-radius: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          .num {
+            color: white;
+            font-size: 13px;
+          }
+        }
+      }
     }
   }
 `;
 
 const Header = () => {
+  const { data } = useContext(BookContext);
   return (
     <HeaderContainer>
       <div className="set-width">
@@ -48,10 +72,17 @@ const Header = () => {
               <a>Categories</a>
             </Link>
           </li>
-          <li>
+          <li className="collection-menu">
             <Link href="/bookmark">
-              <a>My Books</a>
+              <a>My Collection</a>
             </Link>
+            {data.length != 0 ? (
+              <div className="item-count">
+                <span className="num">{data.length}</span>
+              </div>
+            ) : (
+              ""
+            )}
           </li>
         </ul>
       </div>
